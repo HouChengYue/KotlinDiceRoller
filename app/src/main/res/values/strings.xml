@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KotlinDiceRoller</string>
+    <string name="cast">抛</string>
 </resources>
