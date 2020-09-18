@@ -5,29 +5,42 @@ package com.hcy.kotlindiceroller
  * @author 侯程月
  * @date 2020/9/17
  */
-abstract class AquariumFish {
+abstract class AquariumFish : FishAction {
     /**
      * 颜色
      */
     abstract val color: String
+    override fun eat() {
+        println("yum")
+    }
 }
 
-interface FishAction{
+interface FishAction {
     fun eat()
 }
+
 interface AquariumAction {
+    /**
+     * 吃
+     */
     fun eat()
+
+    /**
+     * 跳
+     */
     fun jump()
+
     fun clean()
     fun catchFish()
-    fun swim()  {
+    fun swim() {
         println("swim")
     }
 }
+
 /**
  * 鲨鱼
  */
-class Shark : AquariumFish(),FishAction {
+class Shark : AquariumFish(), FishAction {
     override val color: String = "gray"
     override fun eat() {
         println("捕杀并吃鱼")
@@ -35,15 +48,27 @@ class Shark : AquariumFish(),FishAction {
 }
 
 /**
+ * FishColor by Goldcolor 接口委托
+ *
  * 金鱼
  */
-class Plecostomus : AquariumFish(),FishAction {
-    override val color: String = "gold"
-    override fun eat() {
-        println("吃藻类")
-    }
-}
-fun makeFish(){
+//class Plecostomus : FishColor by Goldcolor,FishAction {
+//    override fun eat() {
+//        println("吃藻类")
+//    }
+//}
+
+//class Plecostomus(fishColor: FishColor = Goldcolor) : FishAction, FishColor by fishColor {
+//    override fun eat() {
+//        println("eat algae")
+//    }
+//
+//}
+class Plecostomus(fishColor: FishColor = Goldcolor) :
+    FishAction by PrintingFishAction("吃水藻"),
+    FishColor by fishColor {}
+
+fun makeFish() {
     val shark = Shark()
     shark.eat()
     val pleco = Plecostomus()
@@ -51,6 +76,38 @@ fun makeFish(){
     println("Shark: ${shark.color}")
     println("Plecostomus: ${pleco.color}")
 }
-fun main(){
+
+/**
+ * 鱼的颜色
+ */
+interface FishColor {
+    /**
+     * 颜色
+     */
+    val color: String
+}
+
+/**
+ * 金色
+ */
+object Goldcolor : FishColor {
+    override val color = "金色"
+}
+
+/**
+ * 灰色
+ */
+object Graycolor : FishColor {
+    override val color = "灰色"
+}
+
+class PrintingFishAction(val food: String) : FishAction {
+    override fun eat() {
+        println(food)
+    }
+}
+
+
+fun main() {
     makeFish()
 }
