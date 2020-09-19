@@ -1,5 +1,7 @@
 package com.hcy.kotlindiceroller.decor
 
+import com.hcy.kotlindiceroller.annotation.testAnnotations
+
 /**
  * 数据类相关
  * @ https://codelabs.developers.google.com/codelabs/kotlin-bootcamp-classes/#8

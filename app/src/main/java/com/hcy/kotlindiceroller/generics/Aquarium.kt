@@ -154,3 +154,4 @@ fun genericsExample() {
 
 //    println(aquariumg.hasWaterSupplyofType<LakeWater>())
 }
+

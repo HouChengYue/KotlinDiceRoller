@@ -1,6 +1,13 @@
-package com.hcy.kotlindiceroller.annotation;/**
+package com.hcy.kotlindiceroller.annotation;
+
+/**
  * 描述：
+ *
  * @author 侯程月
  * @date 2020/9/19
- */public class JavaRun {
+ */
+public class JavaRun {
+    public static void runNow(Runnable runnable){
+        runnable.run();
+    }
 }
